@@ -24,6 +24,16 @@ app.post('/users', async (req, res) => {
   }
 });
 
+app.get('/users', async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 mongoose.connect(process.env.STRING_CONNECTION)
   .then(() => {
     console.log('Connected to MongoDB');
