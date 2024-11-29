@@ -28,16 +28,28 @@ module.exports.register = async (req, res) => {
 
 module.exports.login = async (req, res) => {
   try {
-    const { id } = req.params;
-    const user = await User.findById(id);
-
+    const { email, password } = req.body;
+    if(!email || !password) {
+      return res.status(400).json({ message: 'Please provide email and password' });
+    }
+    const user = await User.findOne({ email })
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(400).json({ message: 'invalid user or password' });
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({ message: 'invalid user or password' });
     }
 
-    res.status(200).json(user);
-
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    const createSecretToken = secretToken(user._id);
+    res.cookie('secretToken', createSecretToken, {
+      httpOnly: false,
+      withCredentials: true
+    });
+    res.status(200).json({user, message: 'Login success'});
+  }
+  catch (err) {
+    res.status(400).json({ message: err.message });
   }
 };
