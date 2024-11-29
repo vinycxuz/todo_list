@@ -1,9 +1,23 @@
 const User = require('../models/User.model');
+const bcrypt = require('bcrypt');
+const { secretToken } = require('../utils/secretToken');
 
 module.exports.register = async (req, res) => {
   try {
+    const { email, username, password } = req.body;
+    const userStatus = await User.findOne({ email });
+
+    if (userStatus) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
+
     const user = await User.create(req.body);
-    console.log(user);
+
+    const secretToken = secretToken(user._id);
+    res.cookie('secretToken', secretToken, {
+      httpOnly: false,
+      withCredentials: true
+    });
 
     res.status(201).json(user);
 
