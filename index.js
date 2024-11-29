@@ -7,6 +7,8 @@ require('dotenv').config();
 const userRouter = require('./routes/user.routes');
 const User = require('./models/User.model');
 
+const taskRouter = require('./routes/task.routes');
+
 const app = express();
 
 app.use(cookieParser())
@@ -17,7 +19,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/users', userRouter);
-
+app.use('/tasks', taskRouter);
 
 app.get('/users', async (req, res) => {
   try {
