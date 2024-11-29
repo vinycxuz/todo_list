@@ -1,12 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const userRouter = require('./routes/user.routes');
-
 const User = require('./models/User.model');
 
 const app = express();
+
+app.use(cookieParser())
 app.use(express.json());
 
 app.get('/', (req, res) => {

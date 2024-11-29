@@ -13,8 +13,8 @@ module.exports.register = async (req, res) => {
 
     const user = await User.create(req.body);
 
-    const secretToken = secretToken(user._id);
-    res.cookie('secretToken', secretToken, {
+    const createSecretToken = secretToken(user._id);
+    res.cookie('secretToken', createSecretToken, {
       httpOnly: false,
       withCredentials: true
     });
