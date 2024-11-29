@@ -2,17 +2,20 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+const userRouter = require('./routes/user.routes');
+
 const User = require('./models/User.model');
 
 const app = express();
-
 app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('First Server Test');
 });
 
-app.post('/users', async (req, res) => {
+app.use('/users', userRouter);
+
+/*app.post('/users', async (req, res) => {
   try {
     const user = await User.create(req.body);
     console.log(user);
@@ -24,6 +27,8 @@ app.post('/users', async (req, res) => {
   }
 });
 
+*/
+
 app.get('/users', async (req, res) => {
   try {
     const users = await User.find();
@@ -34,7 +39,7 @@ app.get('/users', async (req, res) => {
   }
 });
 
-app.get('/users/:id', async (req, res) => {
+/*app.get('/users/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
@@ -49,6 +54,8 @@ app.get('/users/:id', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+*/
 
 app.put('/users/:id', async (req, res) => {
   try {
