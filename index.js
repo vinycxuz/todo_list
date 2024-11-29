@@ -18,19 +18,6 @@ app.get('/', (req, res) => {
 
 app.use('/users', userRouter);
 
-/*app.post('/users', async (req, res) => {
-  try {
-    const user = await User.create(req.body);
-    console.log(user);
-
-    res.status(201).json(user);
-
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-});
-
-*/
 
 app.get('/users', async (req, res) => {
   try {
@@ -42,24 +29,7 @@ app.get('/users', async (req, res) => {
   }
 });
 
-/*app.get('/users/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const user = await User.findById(id);
-
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    res.status(200).json(user);
-
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
-*/
-
+/*
 app.put('/users/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -92,6 +62,7 @@ app.delete('/users/:id', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+*/
 
 mongoose.connect(process.env.STRING_CONNECTION)
   .then(() => {
