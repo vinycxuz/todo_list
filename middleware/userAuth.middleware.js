@@ -3,7 +3,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 module.exports.userAuth = async (req, res, next) => {
-  const token = req.cookies.token;
+  const token = req.cookies.secretToken;
   if (!token) {
     return res.status(401).json({ message: 'Not authorized' });
   }
@@ -13,7 +13,8 @@ module.exports.userAuth = async (req, res, next) => {
     }
     const user = await User.findById(data.id);
     if (user) {
-      return res.json({message: 'Authorized', user: user});
+      req.user = user;
+      next();
     } else {
       return res.status(401).json({ message: 'Not authorized' });
     }

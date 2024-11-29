@@ -2,7 +2,11 @@ const Task = require('../models/Task.model');
 
 module.exports.createTask = async (req, res) => {
   try {
-    const task = await Task.create(req.body);
+    const taskData = {
+      ...req.body,
+      user: req.user._id
+    }
+    const task = await Task.create(taskData);
     res.status(201).json(task);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -48,7 +52,7 @@ module.exports.deleteTask = async (req, res) => {
 
 module.exports.getTasks = async (req, res) => {
   try {
-    const tasks = await Task.find();
+    const tasks = await Task.find({user: req.user._id});
     res.status(200).json(tasks);
 
   } catch (err) {
