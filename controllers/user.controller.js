@@ -1,8 +1,8 @@
-const User = require('../models/User.model');
-const bcrypt = require('bcrypt');
-const { secretToken } = require('../utils/secretToken');
+import User from '../models/User.model.js';
+import { compare } from 'bcrypt';
+import { secretToken } from '../utils/secretToken.js';
 
-module.exports.register = async (req, res) => {
+export async function register(req, res) {
   try {
     const { email, username, password } = req.body;
     const userStatus = await User.findOne({ email });
@@ -24,9 +24,9 @@ module.exports.register = async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-};
+}
 
-module.exports.login = async (req, res) => {
+export async function login(req, res) {
   try {
     const { email, password } = req.body;
     if(!email || !password) {
@@ -36,7 +36,7 @@ module.exports.login = async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: 'invalid user or password' });
     }
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await User.compare(password, user.password);
 
     if (!isMatch) {
       return res.status(400).json({ message: 'invalid user or password' });
@@ -52,4 +52,4 @@ module.exports.login = async (req, res) => {
   catch (err) {
     res.status(400).json({ message: err.message });
   }
-};
+}

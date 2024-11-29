@@ -1,6 +1,6 @@
-const Task = require('../models/Task.model');
+import Task from '../models/Task.model.js';
 
-module.exports.createTask = async (req, res) => {
+export async function createTask(req, res) {
   try {
     const taskData = {
       ...req.body,
@@ -11,9 +11,9 @@ module.exports.createTask = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-};
+}
 
-module.exports.updateTask = async (req, res) => {
+export async function updateTask(req, res) {
   try {
     const { id } = req.params;
     const updatedData = {
@@ -32,9 +32,9 @@ module.exports.updateTask = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-};
+}
 
-module.exports.deleteTask = async (req, res) => {
+export async function deleteTask(req, res) {
   try {
     const { id } = req.params;
     const task = await Task.findByIdAndDelete(id);
@@ -48,9 +48,9 @@ module.exports.deleteTask = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-};
+}
 
-module.exports.getTasks = async (req, res) => {
+export async function getTasks(req, res) {
   try {
     const tasks = await Task.find({user: req.user._id});
     res.status(200).json(tasks);
@@ -58,4 +58,4 @@ module.exports.getTasks = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-};
+}

@@ -1,13 +1,16 @@
-const User = require('../models/User.model');
-require('dotenv').config();
-const jwt = require('jsonwebtoken');
+import User from '../models/User.model.js';
+import dotenv from 'dotenv';
+import pkg from 'jsonwebtoken';
 
-module.exports.userAuth = async (req, res, next) => {
+const { verify } = pkg;
+dotenv.config();
+
+export async function userAuth(req, res, next) {
   const token = req.cookies.secretToken;
   if (!token) {
     return res.status(401).json({ message: 'Not authorized' });
   }
-  jwt.verify(token, process.env.JWT_SECRET, async (err, data) => {
+  verify(token, process.env.JWT_SECRET, async (err, data) => {
     if (err) {
       return res.status(401).json({ message: 'Not authorized' });
     }
@@ -19,4 +22,4 @@ module.exports.userAuth = async (req, res, next) => {
       return res.status(401).json({ message: 'Not authorized' });
     }
   });
-};
+}
