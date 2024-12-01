@@ -17,6 +17,11 @@ const app = express();
 app.use(cookieParser())
 app.use(json());
 dotenv.config();
+app.use(cors({
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 
 app.get('/', (req, res) => {
   res.send('First Server Test');
