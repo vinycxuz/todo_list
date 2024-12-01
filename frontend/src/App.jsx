@@ -3,6 +3,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Tasks from './components/Tasks';
 import { AuthProvider } from './context/AuthContext';
+import ListTasks from './components/ListTasks';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/tasks/create" element={<Tasks />} />
+          <Route path="/tasks" element={<ListTasks />} />
         </Routes>
       </Router>
     </AuthProvider>

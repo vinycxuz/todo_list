@@ -26,7 +26,7 @@ const Login = () => {
       console.log("User logged in:", response.data);
       setAuth(response.data);
       localStorage.setItem('secretToken', response.data.token);
-      navigate("/tasks");
+      navigate("/tasks/create");
     } catch (error) {
       console.error("Error logging in:", error.response.data);
     }
