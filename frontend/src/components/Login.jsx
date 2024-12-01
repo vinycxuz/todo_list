@@ -1,11 +1,16 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   });
+
+  const { setAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -19,6 +24,9 @@ const Login = () => {
     try {
       const response = await axios.post("http://localhost:3000/users/login", formData);
       console.log("User logged in:", response.data);
+      setAuth(response.data);
+      localStorage.setItem('secretToken', response.data.token);
+      navigate("/tasks");
     } catch (error) {
       console.error("Error logging in:", error.response.data);
     }
