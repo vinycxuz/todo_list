@@ -10,7 +10,7 @@ import User from './models/User.model.js';
 import taskRouter from './routes/task.routes.js';
 
 import { connectDB } from './database/mongoClient.js';
-import { redisClient } from './database/redisClient.js';
+import { connectRedis } from './database/redisClient.js';
 
 const app = express();
 
@@ -71,7 +71,7 @@ app.delete('/users/:id', async (req, res) => {
 */
 
 connectDB();
-redisClient();
+connectRedis();
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');

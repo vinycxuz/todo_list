@@ -1,6 +1,8 @@
 import User from '../models/User.model.js';
 import bcrypt from 'bcrypt';
 import { secretToken } from '../utils/secretToken.js';
+import redisClient from '../database/redisClient.js';
+
 
 export async function register(req, res) {
   try {
@@ -43,6 +45,7 @@ export async function login(req, res) {
     }
 
     const createSecretToken = secretToken(user._id);
+    await redisClient.set(user._id.toString(), createSecretToken);
 
     res.cookie('secretToken', createSecretToken, {
       httpOnly: true,
