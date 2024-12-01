@@ -4,13 +4,13 @@ import { createClient } from 'redis';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 
-import { connect } from 'mongoose';
-
 import userRouter from './routes/user.routes.js';
 import User from './models/User.model.js';
 
 import taskRouter from './routes/task.routes.js';
+
 import { connectDB } from './database/mongoClient.js';
+import { redisClient } from './database/redisClient.js';
 
 const app = express();
 
@@ -71,24 +71,7 @@ app.delete('/users/:id', async (req, res) => {
 */
 
 connectDB();
-
-const client = createClient({
-  password: process.env.REDIS_PASSWORD,
-  socket: {
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT
-  }
-})
-client.on('error', err => console.log('Redis Client Error', err))
-client.connect()
-  .then(() => {
-    console.log('Connected to Redis');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-  
+redisClient();
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
