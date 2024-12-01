@@ -1,5 +1,5 @@
 import User from '../models/User.model.js';
-import { compare } from 'bcrypt';
+import bcrypt from 'bcrypt';
 import { secretToken } from '../utils/secretToken.js';
 
 export async function register(req, res) {
@@ -36,13 +36,14 @@ export async function login(req, res) {
     if (!user) {
       return res.status(400).json({ message: 'invalid user or password' });
     }
-    const isMatch = await User.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
       return res.status(400).json({ message: 'invalid user or password' });
     }
 
     const createSecretToken = secretToken(user._id);
+
     res.cookie('secretToken', createSecretToken, {
       httpOnly: true,
       withCredentials: true

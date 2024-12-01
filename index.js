@@ -83,9 +83,14 @@ const client = createClient({
     port: process.env.REDIS_PORT
   }
 })
-.on('error', err => console.log('Redis Client Error', err))
-.connect();
-  
+client.on('error', err => console.log('Redis Client Error', err))
+client.connect()
+  .then(() => {
+    console.log('Connected to Redis');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
   
 
