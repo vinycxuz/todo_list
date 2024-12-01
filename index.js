@@ -1,14 +1,16 @@
 import express, { json } from 'express';
-import { connect } from 'mongoose';
 import cors from 'cors';
 import { createClient } from 'redis';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 
+import { connect } from 'mongoose';
+
 import userRouter from './routes/user.routes.js';
 import User from './models/User.model.js';
 
 import taskRouter from './routes/task.routes.js';
+import { connectDB } from './database/mongoClient.js';
 
 const app = express();
 
@@ -68,13 +70,7 @@ app.delete('/users/:id', async (req, res) => {
 });
 */
 
-connect(process.env.STRING_CONNECTION)
-  .then(() => {
-    console.log('Connected to MongoDB');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+connectDB();
 
 const client = createClient({
   password: process.env.REDIS_PASSWORD,
