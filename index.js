@@ -3,7 +3,8 @@ import cors from 'cors';
 import { createClient } from 'redis';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
-import path from 'path';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 import userRouter from './routes/user.routes.js';
 import User from './models/User.model.js';
@@ -14,8 +15,10 @@ import { connectDB } from './database/mongoClient.js';
 import { connectRedis } from './database/redisClient.js';
 
 const app = express();
-
 const port = process.env.PORT || 3000;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 app.use(cookieParser())
 app.use(json());
@@ -26,11 +29,10 @@ app.use(cors({
   credentials: true
 }));
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
+app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
 });
 
 app.use('/users', userRouter);
@@ -40,5 +42,5 @@ connectDB();
 connectRedis();
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log('Server is running on port 3000');
 });
