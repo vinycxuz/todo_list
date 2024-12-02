@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "dev": "node index.js",
     "client": "cd ./frontend && npm run build && npm run dev",
-    "dev": "concurrently \"npm run start\" \"npm run client\""
+    "start": "concurrently \"npm run dev\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
