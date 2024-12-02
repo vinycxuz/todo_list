@@ -1,8 +1,8 @@
 import express, { json } from 'express';
 import cors from 'cors';
-
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
+import helmet from 'helmet';
 
 import userRouter from './routes/user.routes.js';
 import taskRouter from './routes/task.routes.js';
@@ -15,9 +15,9 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(helmet());
 app.use(cookieParser());
 app.use(json());
-
 app.use(cors());
 
 app.use((req, res, next) => {
