@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "client": "cd ./frontend && npm i && npm run build",
+    "client": "cd ./frontend && npm run build && npm run dev",
     "dev": "concurrently \"npm run start\" \"npm run client\""
   },
   "keywords": [],

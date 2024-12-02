@@ -25,15 +25,16 @@ app.use(cors());
 app.use('/users', userRouter);
 app.use('/tasks', taskRouter);
 
+app.use(express.static(path.join(__dirname, './frontend/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './frontend/dist', 'index.html'));
+});
+
+
 async function startServer() {
   await connectDB();
   await connectRedis();
-
-  app.use(express.static(path.join(__dirname, 'frontend/dist')));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'));
-  });
 
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
