@@ -22,12 +22,6 @@ const port = process.env.PORT || 3000;
 app.use(cookieParser());
 app.use(json());
 
-app.use(cors({
-  origin: 'https://todo-list-vinycxuz-902a28c21ca1.herokuapp.com',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
-
 app.use(express.static(path.join(__dirname, './frontend/dist')));
 
 app.get('*', (req, res) => {
