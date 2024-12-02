@@ -20,6 +20,13 @@ app.use(json());
 
 app.use(cors());
 
+app.use((req, res, next) => {
+  if (req.secure || req.headers['x-forwarded-proto'] === 'https') {
+    return next();
+  }
+  res.redirect(`https://${req.headers.host}${req.url}`);
+});
+
 app.use('/users', userRouter);
 app.use('/tasks', taskRouter);
 
