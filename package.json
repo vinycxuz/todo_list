@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-  "start": "node index.js && cd ./frontend && npm i && npm run dev",
+  "start": "node index.js",
   "client": "cd ./frontend && npm i && npm run dev",
   "dev": "concurrently \"npm run start\" \"npm run client\""
   },
