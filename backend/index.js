@@ -1,9 +1,12 @@
+
 import express, { json } from 'express';
 import cors from 'cors';
 import { createClient } from 'redis';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 import userRouter from './routes/user.routes.js';
 import User from './models/User.model.js';
@@ -17,6 +20,9 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 app.use(cookieParser())
 app.use(json());
 dotenv.config();
@@ -27,10 +33,10 @@ app.use(cors({
 }));
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'dist', 'index.html'));
 });
 
 app.use('/users', userRouter);
