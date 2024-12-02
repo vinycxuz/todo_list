@@ -10,7 +10,7 @@ const Tasks = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('secretToken');
-      const response = await axios.post('http://localhost:3000/tasks/create', 
+      const response = await axios.post('https://todo-list-vinycxuz-902a28c21ca1.herokuapp.com/tasks/create', 
         { title, description, status }, 
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -20,7 +20,7 @@ app.use(cookieParser())
 app.use(json());
 dotenv.config();
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://todo-list-vinycxuz-902a28c21ca1.herokuapp.com',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));

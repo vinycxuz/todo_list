@@ -19,7 +19,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/users/register", formData);
+      const response = await axios.post("https://todo-list-vinycxuz-902a28c21ca1.herokuapp.com/users/register", formData);
       console.log("User registered:", response.data);
     } catch (error) {
       console.error("Error registering user:", error.response.data);

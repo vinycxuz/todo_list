@@ -8,7 +8,7 @@ const ListTasks = () => {
     const fetchTasks = async () => {
       try {
         const token = localStorage.getItem('secretToken');
-        const response = await axios.get('http://localhost:3000/tasks/', {
+        const response = await axios.get('https://todo-list-vinycxuz-902a28c21ca1.herokuapp.com/tasks/', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setTasks(response.data);
@@ -24,7 +24,7 @@ const ListTasks = () => {
     try {
       const token = localStorage.getItem('secretToken');
       const updatedDate = new Date();
-      const response = await axios.put(`http://localhost:3000/tasks/update/${taskId}`, 
+      const response = await axios.put(`https://todo-list-vinycxuz-902a28c21ca1.herokuapp.com/tasks/update/${taskId}`, 
         { status: newStatus, updated_date: updatedDate }, 
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -38,7 +38,7 @@ const ListTasks = () => {
   const handleDelete = async (taskId) => {
     try {
       const token = localStorage.getItem('secretToken');
-      await axios.delete(`http://localhost:3000/tasks/delete/${taskId}`, {
+      await axios.delete(`https://todo-list-vinycxuz-902a28c21ca1.herokuapp.com/tasks/delete/${taskId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTasks(tasks.filter(task => task._id !== taskId));
