@@ -3,6 +3,7 @@ import cors from 'cors';
 import { createClient } from 'redis';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
+import path from 'path';
 
 import userRouter from './routes/user.routes.js';
 import User from './models/User.model.js';
@@ -25,8 +26,10 @@ app.use(cors({
   credentials: true
 }));
 
+app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
+
 app.get('/', (req, res) => {
-  res.send('First Server Test');
+  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 });
 
 app.use('/users', userRouter);
@@ -36,5 +39,5 @@ connectDB();
 connectRedis();
 
 app.listen(port, () => {
-  console.log('Server is running on port 3000');
+  console.log(`Server is running on port ${port}`);
 });
