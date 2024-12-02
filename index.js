@@ -20,6 +20,7 @@ const __dirname = path.dirname(__filename);
 
 app.use(cookieParser());
 app.use(json());
+app.use(cors());
 
 app.use('/users', userRouter);
 app.use('/tasks', taskRouter);
