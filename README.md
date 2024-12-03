@@ -13,20 +13,24 @@ Para realizar todas as operações de tarefas, o usuário deve estar previamento
 
 
 ## Tech Stack
+OBS: Entre parênteses a explicação
+**Database:** 
+MongoDb (por ser mais leve e buscas mais rápidas e não ter a necessidade de relacionamentos já que nesse caso posso referenciar as tarefas ao usuário único), 
+Redis (foi pré-requisito)
 
-**Database:** MongoDb, Redis
+**Servidor:** 
+Node.js com Express (Por expertise)
 
-**Servidor:** Node.js, Express
+**Deploy:** Heroku (O Heroku já faz a configuração de SSL, entçao optei por fazer deploy do backend no heroku e frontend com Azure)
 
-**Deploy:** Heroku
-
-**Bibliotecas e frameworks**: bcrypt, cookie-parser, dotenv, helmet, jsonwebtoken, mongoose
-
-
-
-
-
-
+**Bibliotecas e frameworks**: 
+- bcrypt (hash das senhas)
+- cookie-parser (manipulação dos cookies)
+- dotenv 
+- helmet (segurança das cabeçalhos HTTPS)
+- jsonwebtoken (pré-requisito) 
+- mongoose (requisições no banco de dados noSql)
+- express-validator (sanitização das entradas)
 
 ## Environment Variables
 
@@ -106,16 +110,26 @@ User não está como required mas só é possível realizar criação de tasks a
 | `password`      | `string` | **Required**.|
 
 
-Takes two numbers and returns the sum.
+
+```http
+  POST /users/login
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `email`      | `string`| **Required**.|
+| `password`      | `string` | **Required**.|
 
 
-## Roadmap
+OBS: Senha precisa ter uma maiuscula, uma minuscula, um símbolo que não pode ser o ponto, um número e o mínimo de 8 caracteres
+
+## Roadmap dos próximos updates
 
 - Criação de testes unitários para as requisições
 
 - Documentação da API no swagger
 
-
+- API da openai para sugestão de descrição a partir do título da tarefa
 
 ## Support
 
