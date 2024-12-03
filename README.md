@@ -143,7 +143,9 @@ OBS: Senha precisa ter uma maiuscula, uma minuscula, um símbolo que não pode s
 
 - API da openai para sugestão de descrição a partir do título da tarefa
 
-## Support
+## Support e link levantamento inicial do projeto
+
+https://excalidraw.com/#json=qaEZLUU-gJooiu4H8RpUc,Ncqhi6m6FAKIDOwoXo5Atg
 
 Para suporte, email: vinyby@gmail.com
 
