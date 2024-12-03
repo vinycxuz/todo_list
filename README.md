@@ -32,7 +32,7 @@ Node.js com Express (Por expertise)
 - mongoose (requisições no banco de dados noSql)
 - express-validator (sanitização das entradas)
 
-## Environment Variables
+## Environment Variables e funcionamento
 
 Para rodar esse projeto, irá precisar criar um arquivo .env para:
 
@@ -45,6 +45,10 @@ Para rodar esse projeto, irá precisar criar um arquivo .env para:
 `REDIS_PASSWORD` (Senha de após criação de database no redis)
 
 `REDIS_PORT` (Porta do host da database criado na sua conta redis)
+
+Após isso, executar npm install no diretório do projeto. (Já está pré configurado para funcionar na porta 300 em caso de ausência de port externo).
+
+
 
 ## API
 
