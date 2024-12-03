@@ -9,7 +9,15 @@ Projeto de um ToDo App, objetivo do usuário:
 
 Para realizar todas as operações de tarefas, o usuário deve estar previamento logado e caso não tenha uma conta, poderá se registrar.
 
+## Versionamento
+(0.1) - versão antes do MVP pronto
+(1.0) - edições pós mvp
+(feat) - criação de features
+(fix) - correções gerais
+(doc) - edição de documentos
 
+padrão em inglês e commits da seguinte forma:
+(versão)(tipo de comiit): mensagem do commit
 
 
 ## Tech Stack
